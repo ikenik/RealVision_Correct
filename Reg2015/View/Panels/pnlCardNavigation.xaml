@@ -1,0 +1,71 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Reg2015.View.Panels"
+             xmlns:RVDataModel="clr-namespace:Reg2015.RVDataModel" xmlns:Convertors="clr-namespace:Reg2015.View.Convertors" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Reg2015.View.Panels.pnlCardNavigation"
+             mc:Ignorable="d" MinHeight="300" Loaded="CardNavigation_Loaded"
+             DataContext="{DynamicResource tblPatientInfoViewSource}">
+    <UserControl.Resources>
+        <Convertors:PatientDesc x:Key="PatientDesc"/>
+        <!--<CollectionViewSource x:Key="tblPatientInfoViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblCard}, CreateList=True}"/>-->
+        <!--<Convertors:CardLocationToColor x:Key="CardLocationToColor"/>-->
+        <DataTemplate x:Key="dtpltCardInfoItem">
+            <Border x:Name="border" Style="{DynamicResource RarItemStyle}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock TextWrapping="NoWrap" Text="{Binding Number}" FontWeight="Bold" />
+                    <StackPanel  Orientation="Horizontal" DataContext="{Binding}">
+                        <TextBlock TextWrapping="NoWrap" Text="{Binding FirstName}"   Margin="5,0,0,0"  />
+                        <TextBlock TextWrapping="NoWrap" Text="{Binding LastName}"   Margin="5,0,0,0"  />
+                        <TextBlock TextWrapping="NoWrap" Text="{Binding FatherName}" Margin="5,0,0,0"  />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="NumberTextBoxMarg" TargetType="{x:Type TextBox}" BasedOn="{StaticResource RarItemStyle}">
+            <Setter Property="Margin" Value="3,4"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="grdFiltr" Grid.Row="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="0" Content="№"/>
+            <TextBox x:Name="numberTextBox" VerticalAlignment="Center" Text="{Binding Number, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Style="{DynamicResource NumberTextBoxMarg}" TextChanged="numberTextBox_TextChanged" GotFocus="numberTextBox_GotFocus" LostFocus="numberTextBox_LostFocus" FontWeight="Bold"/>
+
+            <Label VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" Grid.Column="0" Content="Ф:"/>
+            <xctk:WatermarkTextBox x:Name="fTextBox" Watermark="Фамилия" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" TextChanged="fioTextBox_TextChanged" />
+            <Label VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Right" Grid.Column="0" Content="И:"/>
+            <xctk:WatermarkTextBox x:Name="iTextBox" Watermark="Имя" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" TextChanged="fioTextBox_TextChanged" />
+            <Label VerticalAlignment="Center" Grid.Row="3" HorizontalAlignment="Right" Grid.Column="0" Content="О:"/>
+            <xctk:WatermarkTextBox x:Name="oTextBox" Watermark="Отчество" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" TextChanged="fioTextBox_TextChanged" />
+
+
+            <Label  Content="Дата:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dateBirthDayDateePicker" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" SelectedDateChanged="dateBirthDayDateePicker_SelectedDateChanged" FirstDayOfWeek="Monday"/>
+            <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Сбросить" Margin="3" Click="btnFlashFiltrClick"/>
+            <!--<xctk:WatermarkTextBox x:Name="watermarkTextBox" Grid.Column="1" Margin="6.181,-0.831,28.115,9.761" Grid.Row="2" TextWrapping="Wrap" Watermark="ytrytr"/>-->
+        </Grid>
+
+        <ListView ItemsSource="{Binding}" x:Name="tblCardListView" SelectionMode="Single" Grid.Row="1" SelectedValuePath="DateCreate" ItemTemplate="{DynamicResource dtpltCardInfoItem}" />
+
+
+    </Grid>
+</UserControl>

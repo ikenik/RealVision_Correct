@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:RVDataModel="clr-namespace:Reg2015.RVDataModel" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <!--xmlns:local="clr-namespace:Reg2015.View"-->
+    <!--Здесь только коллекции верхнего уровня--> 
+    <!--<CollectionViewSource x:Key="tblPatientInfoViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblCard}, CreateList=True}"/>-->
+    <CollectionViewSource x:Key="tblPatientInfoViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblPatientInfo}, CreateList=True}"/>
+    <CollectionViewSource x:Key="tblDocumentViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblDocumentCommon}, CreateList=True}"/>
+    
+    <!-- Коллекции словарей -->
+    <!--<CollectionViewSource x:Key="tblEmployeeViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblEmployee}, CreateList=True}"/>-->
+
+
+    <!--Словари-->
+    <!--<CollectionViewSource x:Key="tblOfferViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblOffer}, CreateList=True}"/>-->
+
+    <RVDataModel:tblEmployee x:Key="tblEmployeeDataSource" d:IsDataSource="False"/>
+    <RVDataModel:tblManipulation x:Key="tblManipulationDataSource" d:IsDataSource="False" />
+    <RVDataModel:tblOffer x:Key="tblOfferDataSource" d:IsDataSource="False"/>
+    <RVDataModel:tblPatient x:Key="tblPatientInfoDataSource" d:IsDataSource="False"/>
+    <RVDataModel:tblDocumentService x:Key="tblDocumentDataSource" d:IsDataSource="False"/>
+</ResourceDictionary>

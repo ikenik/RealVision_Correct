@@ -1,0 +1,312 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Panels="clr-namespace:Reg2015.View.Panels" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:RVDataModel="clr-namespace:Reg2015.RVDataModel" 
+        xmlns:local="clr-namespace:Reg2015" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:Convertors="clr-namespace:Reg2015.View.Convertors" 
+        mc:Ignorable="d" x:Class="Reg2015.MainWindow"
+        Title="Регистратура" Height="850" Width="1300" Loaded="Window_Loaded" FontSize="16" Closing="Window_Closing" Icon="Logo256.png">
+    <Window.Resources>
+        <Convertors:FullYearToday x:Key="FullYearToday"/>
+        <CollectionViewSource x:Key="tblDefaultOfferViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblOffer}, CreateList=True}"/>
+        <CollectionViewSource x:Key="tblEmployeeViewSource" d:DesignSource="{d:DesignInstance {x:Type RVDataModel:tblEmployee}, CreateList=True}"/>
+    </Window.Resources>
+
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="cmdAddPatientAndCadr" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="cmdSaveAll"/>
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="cmdDeleteCurrentPatient"/>
+    </Window.CommandBindings>
+
+    <DockPanel >
+        <Menu DockPanel.Dock="Top" FontSize="16">
+            <MenuItem Header="Пациент" >
+                <MenuItem Header="Новый"   Command="ApplicationCommands.New"  />
+                <MenuItem Header="Сохранить" Command="ApplicationCommands.Save" />
+                <MenuItem Header="Удалить"   Command="ApplicationCommands.Delete"  />
+                <Separator/>
+                <MenuItem Header="Печать карточки" Click="btnPrintDefaultCard" />
+                <Separator/>
+                <MenuItem Header="Показать все документы пациента" />
+            </MenuItem>
+            <!--DisplayMemberPath="DocName"-->
+            <MenuItem Header="Документ">
+                <MenuItem Header="Печать текущего" />
+                <MenuItem Header="Печать выбранных" />
+                <!-- TODO : показать Список карточек и документов которые будут распечатаны -->
+                <Separator/>
+                <MenuItem Header="Все документы для пациента" />
+                <MenuItem Header="Документы по манипуляциям" />
+            </MenuItem>
+
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Карточки">
+                <Panels:pnlCardNavigation DockPanel.Dock="Left" x:Name="pnlNavigator"  Grid.Column="0" DataContext="{DynamicResource tblPatientInfoViewSource}" />
+            </GroupBox>
+            <GridSplitter x:Name="gridSplitter" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5"/>
+
+
+            <TabControl x:Name="tbPanels" Grid.Column="2" Margin="0,9,5,9">
+
+                <TabItem Header="Пациент" DataContext="{DynamicResource tblPatientInfoViewSource}">
+                    <Grid x:Name="pnlPatInfo" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="2*"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="300"/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="Данные пациента" Grid.Row="1">
+                            <Panels:pnlPatientInfo x:Name="pnlMainPanient" DataContext="{Binding /}" JobVisibility="Visible" Margin="0,1,0,1" RequareDocumentsEvent="pnlRequareDocumentsByPatient" />
+                        </GroupBox>
+                        <Panels:pnlManipulationsObs x:Name="pnlManipulations" RequareDocuments="pnlManipulations_RequareDocuments" DataContext="{Binding /tblManipulationsObs}" Grid.ColumnSpan="2" Margin="3" Grid.Row="2"/>
+
+
+                        <!--<StackPanel Grid.Column="1" Grid.Row="1" >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Margin" Value="3"/>
+                                </Style>
+                                <Style TargetType="{x:Type xctk:DropDownButton}">
+                                    <Setter Property="Margin" Value="3"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Button x:Name="btnSave" Content="Сохранить"  VerticalAlignment="Top"  Command="ApplicationCommands.Save"/>
+                            <Button x:Name="btnAddPatient" Content="Новый пациент"  VerticalAlignment="Top" Command="ApplicationCommands.New"/>
+                            <Button x:Name="btnDeleteCard" Content="Удалить карту"  VerticalAlignment="Top" Command="ApplicationCommands.Delete"/>
+
+                            <xctk:DropDownButton  Content="Добавить манипуляцию">
+                                <xctk:DropDownButton.DropDownContent>
+                                    <ListBox ItemTemplate="{DynamicResource DataTemplate1}" SelectionMode="Extended" >
+                                        <ListBox.Resources>
+                                            <DataTemplate x:Key="DataTemplate1">
+                                                <Button  Width="150" Content="{Binding DocName}" Tag="{Binding Mode=OneWay}" Click="btnAddManipulation_Click" />
+                                            </DataTemplate>
+                                        </ListBox.Resources>
+                                        <ListBox.ItemsSource>
+                                            <Binding Source="{StaticResource tblDefaultOfferViewSource}"/>
+                                        </ListBox.ItemsSource>
+                                    </ListBox>
+                                    -->
+                        <!--<Button x:Name="btnAddManipulation" Content="Добавить манипуляцию"  HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top" Click="btnAddManipulation_Click"/>-->
+                        <!--
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+
+                            <xctk:DropDownButton Content="Печатать">
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Margin="0 3" Content="Общая карточка" Click="btnPrintDefaultCard"/>
+                                        <Button Margin="0 3" Content="Карточка для катаракты" Click="btnPrintKataraktCard"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+
+
+                            </xctk:DropDownButton>
+
+                        </StackPanel>-->
+
+                    </Grid>
+                </TabItem>
+
+                <TabItem x:Name="tabDocuments" Header="Документы" DataContext="{StaticResource tblDocumentViewSource}">
+                    <Grid Grid.Column="1"   >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Информация о пациенте-->
+                        <Panels:pnlDocument DataContext="{Binding}"/>
+
+                        <!--Информация о пациенте-->
+                        <Grid Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <GroupBox Header="Данные пациента">
+                                <Panels:pnlPatientInfo TabIndex="1" Grid.Column="0" DataContext="{Binding  /tblPatient}" 
+                                                    JobVisibility="Collapsed" SummaryVisibility="Visible" RarVisibility="Visible" VerticalAlignment="Top"
+                                                     RequareDocumentsEvent="pnlRequareDocumentsByPatient"/>
+                            </GroupBox>
+                            <Grid Grid.Column="1" VerticalAlignment="Center" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Button Content="--&gt;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" />
+                                <Button Content="&lt;--" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+
+                            </Grid>
+                            <GroupBox Header="ДАННЫЕ ДОГОВОРА !!!" Grid.Column="2" Style="{DynamicResource stlDisableForPrinted}" TabIndex="2">
+                                <GroupBox.Resources>
+                                    <Style x:Key="stlDisableForPrinted">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Printed}" Value="True">
+                                                <Setter Property="Control.IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </GroupBox.Resources>
+                                <StackPanel>
+                                    <Panels:pnlPatientInfo Grid.Column="2" DataContext="{Binding}"
+                                                   JobVisibility="Collapsed" SummaryVisibility="Collapsed" RarVisibility="Collapsed" VerticalAlignment="Top"
+                                                   RequareDocumentsEvent="pnlRequareDocumentsByPatient"/>
+
+                                </StackPanel>
+                            </GroupBox>
+                        </Grid>
+                        <!--END Информация о пациенте-->
+                    </Grid>
+
+                </TabItem>
+            </TabControl>
+
+
+            <StatusBar Grid.Row="1" Grid.ColumnSpan="3">
+                <StatusBar.Resources>
+                    <Style x:Key="status-bar-Button" TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <!-- Обязательно кратно двойке -->
+                        <Setter Property="Width"  Value="46"/>
+                        <Setter Property="Height" Value="46"/>
+                    </Style>
+                    <Style x:Key="status-bar-DropDownButton" TargetType="xctk:DropDownButton">
+                        <Setter Property="Background" Value="White"/>
+                        <!-- Обязательно кратно двойке -->
+                        <Setter Property="Width"  Value="56"/>
+                        <Setter Property="Height" Value="46"/>
+                    </Style>
+                    <Style x:Key="button-image" TargetType="Image">
+                        <Setter Property="Width"  Value="32"/>
+                        <Setter Property="Height" Value="32"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <!--<Setter Property="Stretch" Value="UniformToFill"/>
+                        <Setter Property="StretchDirection" Value="Both"/>-->
+                    </Style>
+                </StatusBar.Resources>
+                <Button ToolTip="Добавить пациента" Command="ApplicationCommands.New" Style="{DynamicResource status-bar-Button}">
+                    <Image Source="View/Img/userplus32.png" Style="{DynamicResource button-image}" />
+                </Button>
+                <Button ToolTip="Сохранить" Command="ApplicationCommands.Save" Style="{DynamicResource status-bar-Button}">
+                    <Image Source="View/Img/notecheck32.png"  Style="{DynamicResource button-image}" SnapsToDevicePixels="True" UseLayoutRounding="True" />
+                </Button>
+
+                <Button x:Name="btnAddManipulation" ToolTip="Добавить манипуляцию" Click="btnShowContextMenu" Style="{DynamicResource status-bar-Button}">
+                    <Button.ContextMenu>
+                        <ContextMenu x:Name="conestMenuAdd" ItemsSource="{Binding}" DataContext="{Binding Mode=OneWay, Source={StaticResource tblEmployeeViewSource}}" >
+                            <ContextMenu.ItemContainerStyle>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="Tag" Value="{Binding}"/>
+                                    <Setter Property="Header" Value="{Binding Path=ShortName}"/>
+                                    <EventSetter Event="Click" Handler="menuItenAddPrimaryRecept"/>
+                                </Style>
+                            </ContextMenu.ItemContainerStyle>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+
+                    <!--<Button.ContextMenu>
+                        <ContextMenu DataContext="{Binding Mode=OneWay, Source={StaticResource tblEmployeeViewSource}}">
+                            <ContextMenu.Resources>
+                                <Style x:Key="offers-menu-item" TargetType="MenuItem">
+                                    <Setter Property="Tag" Value="{Binding}"/>
+                                    <Setter Property="Header" Value="{Binding Path=ShortName}"/>
+                                </Style>
+                            </ContextMenu.Resources>
+                            <MenuItem Header="Первичный прием" Click="menuItenAddPrimaryRecept"
+                                      ItemsSource="{Binding}" DataContext="{Binding Mode=OneWay, Source={StaticResource tblEmployeeViewSource}}" ItemContainerStyle="{DynamicResource offers-menu-item}"/>
+                            <MenuItem Header="Платный прием" Click="menuItenAddPaidReception" 
+                                      ItemsSource="{Binding}" DataContext="{Binding Mode=OneWay, Source={StaticResource tblEmployeeViewSource}}"  ItemContainerStyle="{DynamicResource offers-menu-item}"/>
+                            <MenuItem Header="Наблюдение" Click="menuItenAddMonitorReception" 
+                                      ItemsSource="{Binding}" DataContext="{Binding Mode=OneWay, Source={StaticResource tblEmployeeViewSource}}" ItemContainerStyle="{DynamicResource offers-menu-item}"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>-->
+                    <Button.Content>
+                        <Image Source="View/Img/plus32.png"  Style="{DynamicResource button-image}" />
+                    </Button.Content>
+                </Button>
+
+
+                <Separator/>
+
+                <Button ToolTip="Печать карточки" Click="btnPrintCardClick" Style="{DynamicResource status-bar-Button}">
+                    <Button.Content>
+                        <Image Source="View/Img/printer32.png"  Style="{DynamicResource button-image}" SnapsToDevicePixels="True" />
+                    </Button.Content>
+                </Button>
+
+                <Button x:Name="btnPrintDoc" ToolTip="Печать документов" Click="btnShowContextMenu" IsEnabled="{Binding IsSelected, ElementName=tabDocuments}" Style="{DynamicResource status-bar-Button}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Печать выбранных" Click="actPrintSelectedDocuments" />
+                            <MenuItem Header="Печать текущего" Click="actPrintCurrentDocuments"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+
+                    <Button.Content>
+                        <Image Source="View/Img/printerdoc32.png" Style="{DynamicResource button-image}" Stretch="Uniform"/>
+                    </Button.Content>
+                </Button>
+
+                <Separator/>
+                <Button ToolTip="Удалить пациента" Command="ApplicationCommands.Delete" Style="{DynamicResource status-bar-Button}">
+                    <Image Source="View/Img/userminus32.png"  Style="{DynamicResource button-image}" />
+                </Button>
+                <!--<xctk:DropDownButton  Style="{DynamicResource status-bar-DropDownButton}">
+                    <xctk:DropDownButton.DropDownContent>
+                        <ListBox ItemsSource="{Binding}" DataContext="{Binding Mode=OneWay, Source={StaticResource tblEmployeeViewSource}}"   >
+                            
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding ShortName}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </xctk:DropDownButton.DropDownContent>
+                    <xctk:DropDownButton.Content>
+                        <Image Source="View/Img/plus32.png"  Style="{DynamicResource button-image}" />
+                    </xctk:DropDownButton.Content>
+                </xctk:DropDownButton>-->
+
+                <!--<Separator/>
+                <ProgressBar Value="50" Height="30" Width="250" />-->
+
+                <Separator/>
+                <Button ToolTip="Прайс лист" Click="btnOfferChange" Style="{DynamicResource status-bar-Button}">
+                    <Button.Content>
+                        <Image Source="View/Img/moneyreceipt32.png"  Style="{DynamicResource button-image}" SnapsToDevicePixels="True" />
+                    </Button.Content>
+                </Button>
+            </StatusBar>
+        </Grid>
+
+    </DockPanel>
+
+</Window>
