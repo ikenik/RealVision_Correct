@@ -166,9 +166,29 @@ namespace Reg2015.Reports
         public string Phon { get { return FPatient.Phon; } }
         public int Number { get { return FPatient.Number; } }
         public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
+    }
 
+    public class CardFormN_025uAdapter
+    {
+        private tblPatientInfo FPatient;
+        public CardFormN_025uAdapter(tblPatientInfo patient)
+        {
+            FPatient = patient;
+        }
 
+        public DateTime DateCreate { get { return FPatient.DateCreate; } }
+        public string DateCreateStr { get { return Formater.DateTymeToStr(DateCreate, "dd MMMM yyyy г."); } }
+        public string FirstName { get { return FPatient.FirstName; } }
+        public string LastName { get { return FPatient.LastName; } }
+        public string FatherName { get { return FPatient.FatherName; } }
+        public DateTime BirthDay { get { return FPatient.BirthDay ?? new DateTime(); } }
+        public string BirthDayStr { get { return Formater.DateTymeToStr(BirthDay, "dd.MM.yyyy"); } }
 
+        public string Job { get { return FPatient.Job; } }
+        public string Post { get { return FPatient.Post; } }
+        public string Phon { get { return FPatient.Phon; } }
+        public int Number { get { return FPatient.Number; } }
+        public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
     }
 
     public class DocumentAdapter
