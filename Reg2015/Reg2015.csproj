@@ -161,6 +161,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CardFormN_025u.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DataAdapters.cs" />
     <Compile Include="Reports\DocService.cs">
