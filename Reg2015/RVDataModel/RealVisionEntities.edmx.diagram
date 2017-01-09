@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="28335ceedfb943458102a46f3aba71f7" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="RealVisionModel.tblDocumentCommon" Width="2" PointX="10.5" PointY="6.625" />
+        <EntityTypeShape EntityType="RealVisionModel.tblDocumentProduct" Width="1.5" PointX="14.125" PointY="6.75" />
+        <EntityTypeShape EntityType="RealVisionModel.tblDocumentSalesReceipt" Width="1.5" PointX="14.125" PointY="9.25" />
+        <EntityTypeShape EntityType="RealVisionModel.tblDocumentService" Width="2" PointX="13.875" PointY="11.875" />
+        <EntityTypeShape EntityType="RealVisionModel.tblEmployee" Width="1.5" PointX="6" PointY="16.125" />
+        <EntityTypeShape EntityType="RealVisionModel.tblManipulation" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="RealVisionModel.tblOffer" Width="1.5" PointX="6" PointY="10.75" />
+        <EntityTypeShape EntityType="RealVisionModel.tblPatient" Width="1.5" PointX="0.5" PointY="5" />
+        <EntityTypeShape EntityType="RealVisionModel.tblPatientInfo" Width="1.5" PointX="2.875" PointY="6" />
+        <EntityTypeShape EntityType="RealVisionModel.tblReferral" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="RealVisionModel.tblReferralVendor" Width="1.5" PointX="3.75" PointY="1.25" />
+        <AssociationConnector Association="RealVisionModel.FK_tblContract_tblContract" />
+        <AssociationConnector Association="RealVisionModel.FK_tblDocumentCommon_tblManipulation" />
+        <AssociationConnector Association="RealVisionModel.FK_tblDocumentCommon_tblPatient" />
+        <AssociationConnector Association="RealVisionModel.FK_tblManipulation_tblReferral" />
+        <AssociationConnector Association="RealVisionModel.FK_tblReferral_tblPatient" />
+        <AssociationConnector Association="RealVisionModel.FK_tblReferral_tblReferralVendor" />
+        <AssociationConnector Association="RealVisionModel.tblOfferToEmploye" />
+        <InheritanceConnector EntityType="RealVisionModel.tblPatientInfo" />
+        <InheritanceConnector EntityType="RealVisionModel.tblDocumentProduct" />
+        <InheritanceConnector EntityType="RealVisionModel.tblDocumentSalesReceipt" />
+        <InheritanceConnector EntityType="RealVisionModel.tblDocumentService" />
+        <AssociationConnector Association="RealVisionModel.FK_tblManipulation_tblPatient" />
+        <AssociationConnector Association="RealVisionModel.FK_tblManipulation_tblEmployees" />
+        <AssociationConnector Association="RealVisionModel.FK_tblManipulation_tblOffer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

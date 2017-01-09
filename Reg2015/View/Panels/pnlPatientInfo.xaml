@@ -1,0 +1,164 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             xmlns:RVDataModel="clr-namespace:Reg2015.RVDataModel" xmlns:Convertors="clr-namespace:Reg2015.View.Convertors" xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid" x:Name="PatientInfo"
+             x:Class="Reg2015.View.Panels.pnlPatientInfo" 
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" MinWidth="410"
+             DataContext="{DynamicResource tblPatientInfoDataSource}">
+    <UserControl.Resources>
+        <Convertors:NotNullToBool x:Key="NotNullToBool"/>
+        <Convertors:CardKindToBool x:Key="CardKindToBool"/>
+        <Convertors:LocationToBool x:Key="LocationToBool"/>
+        <Convertors:CardKindDescription x:Key="CardKindDescription"/>
+        <Convertors:FullYearToday x:Key="FullYearToday"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <Grid x:Name="pnlFIO" Height="auto" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Фамилия"  />
+            <TextBox x:Name="firstNameTextBox" Grid.Row="1" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" VerticalAlignment="Center"  LostFocus="FIOTextBox_LostFocus" KeyDown="EditorBox_KeyDown" />
+            <TextBlock Text="Имя" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox x:Name="lastNameTextBox" Grid.Column="1" Grid.Row="1" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" VerticalAlignment="Center"   LostFocus="FIOTextBox_LostFocus" KeyDown="EditorBox_KeyDown"/>
+            <TextBlock Text="Отчество" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="fatherNameTextBox" Grid.Column="2" Grid.Row="1" Text="{Binding FatherName, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true}" VerticalAlignment="Center"  LostFocus="FIOTextBox_LostFocus"  KeyDown="EditorBox_KeyDown"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock  Grid.Column="0" Text="Дата рождения: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--<DatePicker Grid.Column="1" x:Name="birthDayDatePicker"  SelectedDate="{Binding BirthDay, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                            HorizontalAlignment="Left" VerticalAlignment="Center"  KeyDown="EditorBox_KeyDown"/>-->
+                <xctk:MaskedTextBox Width="100" Grid.Column="1" ValueDataType="{x:Type s:DateTime}" x:Name="birthDayDatePicker" HorizontalAlignment="Right" 
+                                    VerticalAlignment="Center" Mask="00\.00\.0000" KeyDown="EditorBox_KeyDown" Value="{Binding BirthDay, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" LostFocus="birthDayDatePicker_LostFocus" />
+
+                <TextBlock Grid.Column="2" Text="Телефон: "  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox Grid.Column="3" x:Name="phonTextBox" Text="{Binding Phon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                         VerticalAlignment="Center" KeyDown="EditorBox_KeyDown"/>
+
+            </Grid>
+
+            <TextBlock  Grid.Column="0" Text="Адрес: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
+            <Grid  Grid.Row="1" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="addressTextBox" Grid.Column="1"  Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"  KeyDown="EditorBox_KeyDown" />
+            </Grid>
+
+            <TextBlock  Grid.Column="0" Text="Паспорт серия: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="1" x:Name="paspSeriyaTextBox" Text="{Binding PaspSeriya, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"  KeyDown="EditorBox_KeyDown"/>
+                <TextBlock Grid.Column="2" Text="№: "  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox Grid.Column="3" x:Name="paspNumberTextBox" Text="{Binding PaspNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"  KeyDown="EditorBox_KeyDown"/>
+
+            </Grid>
+
+            <TextBlock  Grid.Column="0" Text="Выдан: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
+            <Grid Grid.Row="3" Grid.Column="1"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="paspIssuingTextBox" Grid.Column="1"  Text="{Binding PaspIssuing, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"  KeyDown="EditorBox_KeyDown" />
+            </Grid>
+
+            <TextBlock  Visibility="{Binding JobVisibility, ElementName=PatientInfo}" x:Name="textBlock"  Grid.Column="0" Text="Место работы: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" IsHitTestVisible="True" />
+            <Grid  Visibility="{Binding JobVisibility, ElementName=PatientInfo}" Grid.Row="4" Grid.Column="1"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="JobTextBox" Grid.Column="1"  Text="{Binding Job, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" KeyDown="EditorBox_KeyDown" />
+            </Grid>
+
+            <TextBlock Visibility="{Binding JobVisibility, ElementName=PatientInfo}" Grid.Column="0" Text="Должность: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="5"/>
+            <Grid Visibility="{Binding JobVisibility, ElementName=PatientInfo}" Grid.Row="5" Grid.Column="1"  >
+                <TextBox x:Name="PostTextBox"  Text="{Binding Post, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"  KeyDown="EditorBox_KeyDown" />
+            </Grid>
+
+            <TextBlock Visibility="{Binding RarVisibility, ElementName=PatientInfo}"  Grid.Column="0" Text="В архиве: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="6"/>
+            <StackPanel  Visibility="{Binding RarVisibility, ElementName=PatientInfo}"  Grid.Row="6" Grid.Column="1"  Orientation="Horizontal">
+                <CheckBox  Visibility="{Binding RarVisibility, ElementName=PatientInfo}"  Margin="2,4,0,4"  IsChecked="{Binding Location, Converter={StaticResource LocationToBool}, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock  Text="Катарактальная: " Margin="15,0,0,0" VerticalAlignment="Center"/>
+                <CheckBox Margin="2,4,0,4" IsChecked="{Binding Kind, Converter={StaticResource CardKindToBool}, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Button Content="Документы" Margin="30,0,0,0" Padding="5 0" Click="btnRequareDocumentsClick" Tag="{Binding}" VerticalAlignment="Center" IsEnabled="{Binding Converter={StaticResource NotNullToBool}, Mode=OneWay}">
+                    <!--<Button.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding}" Value="null">
+                                    -->
+                    <!--<Setter Property="" Value="False"/>-->
+                    <!--
+                                    <Setter Property="bu" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>-->
+                </Button>
+            </StackPanel>
+
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Style="{DynamicResource RarItemStyle}" >
+                <StackPanel Visibility="{Binding SummaryVisibility, ElementName=PatientInfo}"  Margin="3"  Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="True">
+                    <TextBlock Text="Полных лет: "  Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding BirthDay, Converter={StaticResource FullYearToday}}" FontWeight="Bold"  VerticalAlignment="Center" />
+                    <TextBlock Text=", дата регистрации: "/>
+                    <TextBlock Text="{Binding DateCreate, StringFormat=dd.MM.yyyy H:mm}"/>
+                    <TextBlock Text=", №: "/>
+                    <TextBlock Text="{Binding Number}" FontWeight="Bold" />
+                </StackPanel>
+            </Border>
+
+        </Grid>
+
+    </StackPanel>
+
+
+</UserControl>
+
+    
