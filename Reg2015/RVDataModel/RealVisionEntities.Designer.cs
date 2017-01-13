@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\zamaraev\OneDrive\PO\realVision\Reg2015\Reg2015\RVDataModel\RealVisionEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Git\RealVision_Correct\Reg2015\RVDataModel\RealVisionEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
