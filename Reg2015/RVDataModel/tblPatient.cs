@@ -169,6 +169,25 @@ namespace Reg2015.RVDataModel
                 }
             }
         }
+        
+    
+        partial void OnSexChanging(Nullable<short> value);
+        partial void OnSexChanged();
+        private Nullable<short> _Sex;
+        public Nullable<short> Sex 
+        { 
+            get { return _Sex; } 
+            set
+            {
+                if(_Sex != value)
+                {
+                    OnSexChanging(_Sex);
+                    _Sex = value;
+                    OnSexChanged();
+                    OnPropertyChanged("Sex");
+                }
+            }
+        }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         private ICollection<tblDocumentCommon> _tblDocumentCommons;

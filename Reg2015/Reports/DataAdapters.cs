@@ -189,6 +189,43 @@ namespace Reg2015.Reports
         public string Phon { get { return FPatient.Phon; } }
         public int Number { get { return FPatient.Number; } }
         public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
+
+        public string Address { get { return FPatient.Address; } }
+
+        /// <summary>Пол</summary>
+        public string Sex
+        {
+            get
+            {
+                switch (FPatient.Sex)
+                {
+                    case 1: return "муж.";
+                    case 2: return "жен.";
+                    default: return "муж. - 1, жен. - 2";
+                }
+            }
+        }
+
+        /// <summary>Cубъект Российской Федерации</summary>
+        public string Subject { get { throw new NotImplementedException(); } }
+
+        /// <summary>Район</summary>
+        public string District { get { return "#Реализовать"; } }
+        /// <summary>Город</summary>
+        public string City { get { return "#Реализовать"; } }
+        /// <summary>Населенный пункт</summary>
+        public string InhabitedLocality { get { return "#Реализовать"; } }
+        /// <summary>Улица</summary>
+        public string Street { get { return "#Реализовать"; } }
+        /// <summary>Дом</summary>
+        public string House { get { return "#Реализовать"; } }
+        /// <summary>Квартира</summary>
+        public string Flat { get { return "#Реализовать"; } }
+
+        /// <summary>Местность</summary>
+        public string Terrain { get { return "городская - 1, сельская - 2"; } }
+
+
     }
 
     public class DocumentAdapter
