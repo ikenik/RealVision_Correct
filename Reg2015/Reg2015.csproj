@@ -157,6 +157,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\CardFormN_025u.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardFormN_025u.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\DataAdapters.cs" />
     <Compile Include="Reports\DocService.cs">
       <DependentUpon>DocService.rpt</DependentUpon>
@@ -193,6 +199,9 @@
       <DependentUpon>RealVisionEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RVDataModel\OfferClassification.cs">
+      <DependentUpon>RealVisionEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RVDataModel\Sex.cs">
       <DependentUpon>RealVisionEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RVDataModel\tblDocumentCommon.cs">
@@ -331,6 +340,10 @@
     <EmbeddedResource Include="Reports\CardDefault.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CardDefault.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CardFormN_025u.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CardFormN_025u.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DocService.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

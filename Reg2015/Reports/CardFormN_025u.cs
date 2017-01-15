@@ -16,14 +16,14 @@ namespace Reg2015.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class DocService : ReportClass {
+    public class CardFormN_025u : ReportClass {
         
-        public DocService() {
+        public CardFormN_025u() {
         }
         
         public override string ResourceName {
             get {
-                return "DocService.rpt";
+                return "CardFormN_025u.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Reg2015.Reports {
         
         public override string FullResourceName {
             get {
-                return "Reg2015.Reports.DocService.rpt";
+                return "Reg2015.Reports.CardFormN_025u.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace Reg2015.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedDocService : Component, ICachedReport {
+    public class CachedCardFormN_025u : Component, ICachedReport {
         
-        public CachedDocService() {
+        public CachedCardFormN_025u() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace Reg2015.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            DocService rpt = new DocService();
+            CardFormN_025u rpt = new CardFormN_025u();
             rpt.Site = this.Site;
             return rpt;
         }
