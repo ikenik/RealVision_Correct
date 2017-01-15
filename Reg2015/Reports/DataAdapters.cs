@@ -181,59 +181,6 @@ namespace Reg2015.Reports
         public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
     }
 
-    /// <summary>
-    /// Адаптер для карьты со всеми полями адреса. 
-    /// </summary>
-    /// <remarks>Этот адаптер не реализован, нужно подключить КЛАДР или ФИАС</remarks>
-    public class CardFormN_025uAdapter_
-    {
-        private tblPatientInfo FPatient;
-        public CardFormN_025uAdapter_(tblPatientInfo patient)
-        {
-            FPatient = patient;
-        }
-
-        public DateTime DateCreate { get { return FPatient.DateCreate; } }
-        public string DateCreateStr { get { return Formater.DateTymeToStr(DateCreate, "dd MMMM yyyy г."); } }
-        public string FirstName { get { return FPatient.FirstName; } }
-        public string LastName { get { return FPatient.LastName; } }
-        public string FatherName { get { return FPatient.FatherName; } }
-        public DateTime BirthDay { get { return FPatient.BirthDay ?? new DateTime(); } }
-        public string BirthDayStr { get { return Formater.DateTymeToStr(BirthDay, "dd.MM.yyyy"); } }
-
-        public string Job { get { return FPatient.Job; } }
-        public string Post { get { return FPatient.Post; } }
-        public string Phon { get { return FPatient.Phon; } }
-        public int Number { get { return FPatient.Number; } }
-        public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
-
-        public string Address { get { return FPatient.Address; } }
-
-        /// <summary>Пол</summary>
-        public string Sex { get { return Formater.SexToStr(FPatient.Sex); } }
-
-        /// <summary>Cубъект Российской Федерации</summary>
-        public string Subject { get { throw new NotImplementedException(); } }
-
-        /// <summary>Район</summary>
-        public string District { get { return "#Реализовать"; } }
-        /// <summary>Город</summary>
-        public string City { get { return "#Реализовать"; } }
-        /// <summary>Населенный пункт</summary>
-        public string InhabitedLocality { get { return "#Реализовать"; } }
-        /// <summary>Улица</summary>
-        public string Street { get { return "#Реализовать"; } }
-        /// <summary>Дом</summary>
-        public string House { get { return "#Реализовать"; } }
-        /// <summary>Квартира</summary>
-        public string Flat { get { return "#Реализовать"; } }
-
-        /// <summary>Местность</summary>
-        public string Terrain { get { return "городская - 1, сельская - 2"; } }
-
-
-    }
-
     public class CardFormN_025uAdapter
     {
         private tblPatientInfo FPatient;
@@ -256,31 +203,10 @@ namespace Reg2015.Reports
         public int Number { get { return FPatient.Number; } }
         public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
 
-        public string Address { get { return FPatient.Address; } }
+        public string Address { get { return (FPatient.Address.Length < 2) ? "________________________________" : FPatient.Address; } }
 
         /// <summary>Пол</summary>
         public string Sex { get { return Formater.SexToStr(FPatient.Sex); } }
-
-        ///// <summary>Cубъект Российской Федерации</summary>
-        //public string Subject { get { throw new NotImplementedException(); } }
-
-        ///// <summary>Район</summary>
-        //public string District { get { return "#Реализовать"; } }
-        ///// <summary>Город</summary>
-        //public string City { get { return "#Реализовать"; } }
-        ///// <summary>Населенный пункт</summary>
-        //public string InhabitedLocality { get { return "#Реализовать"; } }
-        ///// <summary>Улица</summary>
-        //public string Street { get { return "#Реализовать"; } }
-        ///// <summary>Дом</summary>
-        //public string House { get { return "#Реализовать"; } }
-        ///// <summary>Квартира</summary>
-        //public string Flat { get { return "#Реализовать"; } }
-
-        ///// <summary>Местность</summary>
-        //public string Terrain { get { return "городская - 1, сельская - 2"; } }
-
-
     }
 
     public class DocumentAdapter

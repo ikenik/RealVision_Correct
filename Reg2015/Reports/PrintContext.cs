@@ -22,16 +22,16 @@ namespace Reg2015.Reports
             }
         }
 
-        private PrinterSettings FCardPrinterSettings;
-        protected PrinterSettings CardPrinterSettings
-        {
-            get
-            {
-                if (FCardPrinterSettings == null)
-                    FCardPrinterSettings = new PrinterSettings();
-                return FCardPrinterSettings;
-            }
-        }
+        //private PrinterSettings FCardPrinterSettings;
+        //protected PrinterSettings CardPrinterSettings
+        //{
+        //    get
+        //    {
+        //        if (FCardPrinterSettings == null)
+        //            FCardPrinterSettings = new PrinterSettings();
+        //        return FCardPrinterSettings;
+        //    }
+        //}
 
         private PrinterSettings FDefaultDocPrinterSettings;
         /// <summary>2 копии двухстороняя печать</summary>
@@ -51,6 +51,25 @@ namespace Reg2015.Reports
             }
         }
 
+
+        private PrinterSettings FCardFormN_025uPrinterSettings;
+        /// <summary>2 копии двухстороняя печать</summary>
+        protected PrinterSettings CardFormN_025uPrinterSettings
+        {
+            get
+            {
+                if (FCardFormN_025uPrinterSettings == null)
+                {
+                    FCardFormN_025uPrinterSettings = new PrinterSettings();
+                    if (FCardFormN_025uPrinterSettings.CanDuplex)
+                        FCardFormN_025uPrinterSettings.Duplex = Duplex.Horizontal;
+                    FCardFormN_025uPrinterSettings.Collate = true;
+                    // FDefaultDocPrinterSettings.Copies = 2;
+                }
+                return FCardFormN_025uPrinterSettings;
+            }
+        }
+
         private PrinterSettings FSalesReceiptPrinterSettings;
         /// <summary>1 копия</summary>
         protected PrinterSettings SalesReceiptPrinterSettings
@@ -67,29 +86,15 @@ namespace Reg2015.Reports
         {
             var gquery = from ds in patients
                          group ds by ds.Kind;// into kindGroup
-            // TODO : попробоватьне уничтожать отчет
 
             foreach (var patItems in gquery)
             {
-                ReportClass xReport = new CardDefault();
-                var xSource = patItems.Select(ptnt => new CardDataAdapter(ptnt));
-
-                //switch (patItems.Key)
-                //{
-                //    case CardKind.Default:
-                //        xReport = new Card();
-                //        break;
-                //    case CardKind.ForСataract:
-                //        xReport = new CardСataract();
-                //        break;
-                //}
-                //Debug.Assert(xReport != null);
-                //if (xReport == null)
-                //    continue;
+                ReportClass xReport = new CardFormN_025u();
+                var xSource = patItems.Select(ptnt => new CardFormN_025uAdapter(ptnt));
                 try
                 {
                     xReport.SetDataSource(xSource);
-                    xReport.PrintToPrinter(CardPrinterSettings, CardPrinterSettings.DefaultPageSettings, false);
+                    xReport.PrintToPrinter(CardFormN_025uPrinterSettings, CardFormN_025uPrinterSettings.DefaultPageSettings, false);
                 }
                 finally
                 {

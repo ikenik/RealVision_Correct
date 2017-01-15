@@ -151,12 +151,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Lib\NK.Collections.ObjectViewModel.cs" />
-    <Compile Include="Reports\CardDefault.cs">
-      <DependentUpon>CardDefault.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Reports\CardFormN_025u.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -336,10 +330,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CardDefault.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CardDefault.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CardFormN_025u.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
