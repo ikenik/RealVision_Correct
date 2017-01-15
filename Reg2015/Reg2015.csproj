@@ -201,6 +201,9 @@
     <Compile Include="RVDataModel\OfferClassification.cs">
       <DependentUpon>RealVisionEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="RVDataModel\Sex.cs">
+      <DependentUpon>RealVisionEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="RVDataModel\tblDocumentCommon.cs">
       <DependentUpon>RealVisionEntities.tt</DependentUpon>
     </Compile>
