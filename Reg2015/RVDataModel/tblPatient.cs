@@ -171,10 +171,10 @@ namespace Reg2015.RVDataModel
         }
         
     
-        partial void OnSexChanging(Nullable<short> value);
+        partial void OnSexChanging(Nullable<Sex> value);
         partial void OnSexChanged();
-        private Nullable<short> _Sex;
-        public Nullable<short> Sex 
+        private Nullable<Sex> _Sex;
+        public Nullable<Sex> Sex 
         { 
             get { return _Sex; } 
             set
