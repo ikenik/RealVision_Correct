@@ -142,6 +142,19 @@ namespace Reg2015.Reports
             return value.ToString(format, FLocale);
         }
 
+        /// <summary>
+        /// Пол в строку
+        /// </summary>
+        public static string SexToStr(Sex? sex)
+        {
+            switch (sex)
+            {
+                case Sex.Man: return "муж.";
+                case Sex.Woman: return "жен.";
+                default: return "муж. - 1, жен. - 2";
+            }
+        }
+
     }
 
     public class CardDataAdapter
@@ -166,9 +179,34 @@ namespace Reg2015.Reports
         public string Phon { get { return FPatient.Phon; } }
         public int Number { get { return FPatient.Number; } }
         public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
+    }
 
+    public class CardFormN_025uAdapter
+    {
+        private tblPatientInfo FPatient;
+        public CardFormN_025uAdapter(tblPatientInfo patient)
+        {
+            FPatient = patient;
+        }
 
+        public DateTime DateCreate { get { return FPatient.DateCreate; } }
+        public string DateCreateStr { get { return Formater.DateTymeToStr(DateCreate, "dd MMMM yyyy г."); } }
+        public string FirstName { get { return FPatient.FirstName; } }
+        public string LastName { get { return FPatient.LastName; } }
+        public string FatherName { get { return FPatient.FatherName; } }
+        public DateTime BirthDay { get { return FPatient.BirthDay ?? new DateTime(); } }
+        public string BirthDayStr { get { return Formater.DateTymeToStr(BirthDay, "dd.MM.yyyy"); } }
 
+        public string Job { get { return FPatient.Job; } }
+        public string Post { get { return FPatient.Post; } }
+        public string Phon { get { return FPatient.Phon; } }
+        public int Number { get { return FPatient.Number; } }
+        public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
+
+        public string Address { get { return (FPatient.Address.Length < 2) ? "________________________________" : FPatient.Address; } }
+
+        /// <summary>Пол</summary>
+        public string Sex { get { return Formater.SexToStr(FPatient.Sex); } }
     }
 
     public class DocumentAdapter

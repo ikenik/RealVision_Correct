@@ -127,6 +127,7 @@ warning 6002: The table/view 'RealVision.dbo.tblOfferToEmploye' does not have a 
           <Property Name="FatherName" Type="varchar" MaxLength="25" />
           <Property Name="BirthDay" Type="date" />
           <Property Name="DateDelete" Type="datetime" />
+          <Property Name="Sex" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="tblPatientInfo">
           <Key>
@@ -657,6 +658,7 @@ warning 6002: The table/view 'RealVision.dbo.tblOfferToEmploye' does not have a 
           <NavigationProperty Name="tblDocumentCommons" Relationship="RealVisionModel.FK_tblDocumentCommon_tblPatient" FromRole="tblPatient" ToRole="tblDocumentCommon" />
           <NavigationProperty Name="tblReferrals" Relationship="RealVisionModel.FK_tblReferral_tblPatient" FromRole="tblPatient" ToRole="tblReferral" />
           <NavigationProperty Name="tblManipulations" Relationship="RealVisionModel.FK_tblManipulation_tblPatient" FromRole="tblPatient" ToRole="tblManipulation" />
+          <Property Name="Sex" Type="RealVisionModel.Sex" Nullable="false" />
         </EntityType>
         <EntityType Name="tblPatientInfo" BaseType="RealVisionModel.tblPatient">
           <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -819,6 +821,11 @@ warning 6002: The table/view 'RealVision.dbo.tblOfferToEmploye' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="Sex" UnderlyingType="Byte">
+          <Member Name="Undefined" Value="0" />
+          <Member Name="Man" Value="1" />
+          <Member Name="Woman" Value="2" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -930,6 +937,7 @@ warning 6002: The table/view 'RealVision.dbo.tblOfferToEmploye' does not have a 
           <EntitySetMapping Name="tblPatients">
             <EntityTypeMapping TypeName="IsTypeOf(RealVisionModel.tblPatient)">
               <MappingFragment StoreEntitySet="tblPatient">
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DateDelete" ColumnName="DateDelete" />
                 <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
