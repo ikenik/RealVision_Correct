@@ -31,6 +31,16 @@ namespace Reg2015.View.Panels
             InitializeComponent();
         }
 
+        private string _RadioButtonSexGroup;
+        public string RadioButtonSexGroup
+        {
+            get
+            {
+                return String.IsNullOrEmpty(_RadioButtonSexGroup) ? _RadioButtonSexGroup = Guid.NewGuid().ToString("N") : _RadioButtonSexGroup;
+            }
+        }
+
+
         public event RequareDocumentsByPatient RequareDocumentsEvent;
 
         public Visibility JobVisibility

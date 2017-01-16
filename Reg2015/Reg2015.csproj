@@ -234,6 +234,7 @@
     <Compile Include="ViewModel\IDocument.cs" />
     <Compile Include="View\Convertors\NotNullToBool.cs" />
     <Compile Include="View\Convertors\CardKindToBool.cs" />
+    <Compile Include="View\Convertors\RadioButtonEnumConverter.cs" />
     <Compile Include="View\Convertors\TriggerDocTypeStr.cs" />
     <Compile Include="View\DictWindow\Offers.xaml.cs">
       <DependentUpon>Offers.xaml</DependentUpon>

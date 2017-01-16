@@ -13,6 +13,7 @@ namespace Reg2015.RVDataModel
     
     public enum Sex : byte
     {
+        Undefined = 0,
         Man = 1,
         Woman = 2
     }
