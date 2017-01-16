@@ -53,7 +53,7 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.2")]
 [assembly: AssemblyFileVersion("1.0.0.2")]
-
+[assembly: NeutralResourcesLanguageAttribute("ru-RU")]
 
 // 1.0.0.2 Начало обновления 7 января 2017. Обновление титульной страницы карточки
 // Стандартизация карточки, обновление обложки
