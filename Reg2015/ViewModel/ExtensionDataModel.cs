@@ -36,10 +36,6 @@ namespace Reg2015.RVDataModel
 
     public partial class tblManipulation : IIndestructibleObject, IDocOwner
     {
-        #region IIndestructibleObject
-        public bool ForceRemove { get; set; }
-        #endregion
-
         // Если tblDocumentCommons абстрактный то БД уходят страшные зспросы
         public int DocumentsCount
         {
@@ -110,10 +106,6 @@ namespace Reg2015.RVDataModel
     }
     public partial class tblPatient : IIndestructibleObject, IDocOwner
     {
-        #region IIndestructibleObject
-        public bool ForceRemove { get; set; }
-        #endregion
-
 
         #region Синхронизация всех договоров связанных пациентом
         partial void OnFirstNameChanged()
@@ -359,10 +351,6 @@ namespace Reg2015.RVDataModel
 
     public partial class tblDocumentCommon : IIndestructibleObject, ICommonPatientInfo, IDocumentCommon
     {
-        #region IIndestructibleObject
-        public bool ForceRemove { get; set; }
-        #endregion
-
         #region Синхронизация всех договоров связанных однй манипуляцией или пациентом
 
         partial void OnEyeChanged()
@@ -663,18 +651,9 @@ namespace Reg2015.RVDataModel
         }
     }
 
-    public partial class tblReferralVendor : IIndestructibleObject
-    {
-        #region IIndestructibleObject
-        public bool ForceRemove { get; set; }
-        #endregion
-    }
+    public partial class tblReferralVendor : IIndestructibleObject { }
     public partial class tblOffer : IIndestructibleObject
     {
-        #region IIndestructibleObject
-        public bool ForceRemove { get; set; }
-        #endregion
-
         private bool? FIsReadOnly;
         public bool IsReadOnly
         {
@@ -683,12 +662,7 @@ namespace Reg2015.RVDataModel
         }
 
     }
-    public partial class tblEmployee : IIndestructibleObject
-    {
-        #region IIndestructibleObject
-        public bool ForceRemove { get; set; }
-        #endregion
-    }
+    public partial class tblEmployee : IIndestructibleObject { }
 
     //public partial class          : IIndestructibleObject { }
     //public partial class          : IIndestructibleObject { }

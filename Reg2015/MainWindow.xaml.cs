@@ -34,12 +34,10 @@ namespace Reg2015
         }
 
         private ViewDataContext FViewDataContext;
-        private DataHelper FDataHelper;
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var RVDataContext = new RealVisionDataContext();
-            FDataHelper = new DataHelper();
             //var xPtntQuery = RVDataContext.tblPatients.Include("tblDocumentCommons").Where(ptnt => ptnt is tblPatientInfo).Take(10);
             //var xDocQuery = RVDataContext.tblDocumentCommons.Where(doc => ((doc.DateDelete == null) && (!doc.Printed))).OrderByDescending(doc => doc.DateCreate);
             //xPtntQuery.ToList();
@@ -57,39 +55,6 @@ namespace Reg2015
 
             CollectionViewSource tblEmployeeViewSource = ((CollectionViewSource)(FindResource("tblEmployeeViewSource")));
             tblEmployeeViewSource.Source = FViewDataContext.DictEmployees;
-
-            pnlMainPanient.DateTimeLostEvent += pnlMainPanient_DateTimeLostEvent;
-        }
-
-        private async void pnlMainPanient_DateTimeLostEvent(string f, string i, string o, DateTime birthDate)
-        {
-            tblPatientInfo xCurrent = FViewDataContext.CurrentPatient;
-            if (!Guid.Empty.Equals(xCurrent.ID))
-                return;
-
-
-            List<tblPatientInfo> xPatients = await FDataHelper.FindPatientIDByFIOData(f, i, o, birthDate);
-            if (xPatients.Count == 0)
-                return;
-
-            StringBuilder xMsg = new StringBuilder();
-            xMsg.AppendFormat("Такие данные уже есть.     {0} {1} {2}, дата рождения {3: dd MMMM yyyy}", f, i, o, birthDate); xMsg.AppendLine();
-            xMsg.AppendLine();
-            xMsg.Append(xPatients.Count > 1 ? "№ карточек:\r\n" : "№ карточки: ");
-            xMsg.Append(string.Join(";\r\n", xPatients.Select(ptnt => string.Format("{0}, зарегистрирована {1: dd MMMM yyyy}", ptnt.Number, ptnt.DateCreate)).ToArray()));
-            xMsg.AppendLine(".");
-            xMsg.AppendLine();
-            xMsg.AppendLine("Да  - Все равно ввести новые данные");
-            xMsg.AppendLine("Нет - Отменить ввод и просмотреть существующие данные");
-
-            MessageBoxResult xRes = System.Windows.MessageBox.Show(xMsg.ToString(), "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Stop);
-            if (xRes == MessageBoxResult.Yes)
-                return;
-
-            xCurrent.ForceRemove = true;
-            FViewDataContext.PatientInfos.Remove(xCurrent);
-            await SaveAllChanges();
-            await FViewDataContext.SetCardsByFIOViewSource(f, i, o, birthDate);
         }
 
         protected async Task SaveAllChanges()

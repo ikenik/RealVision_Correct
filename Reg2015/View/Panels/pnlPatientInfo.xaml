@@ -6,8 +6,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:RVDataModel="clr-namespace:Reg2015.RVDataModel" xmlns:Convertors="clr-namespace:Reg2015.View.Convertors" xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid" x:Name="PatientInfo"
              x:Class="Reg2015.View.Panels.pnlPatientInfo" 
-             xmlns:s="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" MinWidth="410"
+             mc:Ignorable="d" MinWidth="410" 
              DataContext="{DynamicResource tblPatientInfoDataSource}">
     <UserControl.Resources>
         <Convertors:RadioButtonEnumConverter x:Key="RadioButtonEnumConverter"/>

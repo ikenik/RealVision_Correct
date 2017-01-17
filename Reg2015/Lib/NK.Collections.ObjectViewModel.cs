@@ -12,7 +12,6 @@ namespace NK.Collections.ObjectViewModel
     public interface IIndestructibleObject
     {
         DateTime? DateDelete { get; set; }
-        bool ForceRemove { get; set; }
     }
 
     /// <summary>
@@ -44,23 +43,24 @@ namespace NK.Collections.ObjectViewModel
                         FSetContext.Add(Newitem);
                     break;
                 case NotifyCollectionChangedAction.Remove:
+                  
                     foreach (T OldItem in e.OldItems)
                     {
                         IIndestructibleObject xObj = OldItem as IIndestructibleObject;
-                        if ((xObj == null) || (xObj.ForceRemove))
+                        if (xObj == null)
                             FSetContext.Remove(OldItem);
                         else
                             xObj.DateDelete = DateTime.Now;
                     }
                     break;
-                //case NotifyCollectionChangedAction.Replace:
-                //    break;
-                //case NotifyCollectionChangedAction.Move:
-                //    break;
-                //case NotifyCollectionChangedAction.Reset:
-                //    break;
-                //default:
-                //    break;
+                    //case NotifyCollectionChangedAction.Replace:
+                    //    break;
+                    //case NotifyCollectionChangedAction.Move:
+                    //    break;
+                    //case NotifyCollectionChangedAction.Reset:
+                    //    break;
+                    //default:
+                    //    break;
             }
         }
     }
