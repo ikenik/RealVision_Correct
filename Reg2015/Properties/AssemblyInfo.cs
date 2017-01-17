@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Reg2015")]
 [assembly: AssemblyDescription("Регистратура")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Реал Вижн")]
 [assembly: AssemblyProduct("Reg2015")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
