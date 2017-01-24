@@ -43,7 +43,6 @@ namespace NK.Collections.ObjectViewModel
                         FSetContext.Add(Newitem);
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                  
                     foreach (T OldItem in e.OldItems)
                     {
                         IIndestructibleObject xObj = OldItem as IIndestructibleObject;
@@ -53,14 +52,14 @@ namespace NK.Collections.ObjectViewModel
                             xObj.DateDelete = DateTime.Now;
                     }
                     break;
-                    //case NotifyCollectionChangedAction.Replace:
-                    //    break;
-                    //case NotifyCollectionChangedAction.Move:
-                    //    break;
-                    //case NotifyCollectionChangedAction.Reset:
-                    //    break;
-                    //default:
-                    //    break;
+                //case NotifyCollectionChangedAction.Replace:
+                //    break;
+                //case NotifyCollectionChangedAction.Move:
+                //    break;
+                //case NotifyCollectionChangedAction.Reset:
+                //    break;
+                //default:
+                //    break;
             }
         }
     }
