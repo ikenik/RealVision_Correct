@@ -30,43 +30,80 @@ namespace Reg2015.View.Panels
             FViewDataContext = ViewDataContext.Instance;
         }
 
-        private void ClearFIOFiltr()
-        {
-            fTextBox.Text = "";
-            iTextBox.Text = "";
-            oTextBox.Text = "";
-            dateBirthDayDateePicker.SelectedDate = null;
-        }
-
-
-        private bool FLockFiltrChange = false;
-
-        private async void btnFlashFiltrClick(object sender, RoutedEventArgs e)
+        private void ClearFIODateFiltr()
         {
             FLockFiltrChange = true;
             try
             {
-                ClearFIOFiltr();
+                fTextBox.Text = "";
+                iTextBox.Text = "";
+                oTextBox.Text = "";
+                dateBirthDayDateePicker.SelectedDate = null;
             }
             finally
             {
                 FLockFiltrChange = false;
             }
+        }
+
+        private void ClearDateReceiptFiltr()
+        {
+            FLockFiltrChange = true;
+            try
+            {
+                dateFirstReceiptDateePicker.SelectedDate = null;
+            }
+            finally
+            {
+                FLockFiltrChange = false;
+            }
+        }
+
+        private void ClearFiltr()
+        {
+            ClearFIODateFiltr();
+            ClearDateReceiptFiltr();
+        }
+
+        private bool FLockFiltrChange = false;
+
+        private async void btnFlashFiltrClick(object sender, RoutedEventArgs e)
+        {
+
+            ClearFiltr();
+
             // dateBirthDayDateePicker.Text = "";
             await FViewDataContext.SetDefaultCardsViewSource();
         }
 
-        private async Task ApplyFiltr()
+        /// <summary>
+        /// Фильтр персоны, ФИО и Дата
+        /// </summary>
+        /// <returns></returns>
+        private async Task ApplyPersonFiltr()
         {
+            ClearDateReceiptFiltr();
             //if (!(fTextBox.IsFocused || iTextBox.IsFocused || oTextBox.IsFocused || dateBirthDayDateePicker.IsFocused))
             //    return;
             await FViewDataContext.SetCardsByFIOViewSource(fTextBox.Text, iTextBox.Text, oTextBox.Text, dateBirthDayDateePicker.SelectedDate);
         }
 
+
+        /// <summary>
+        /// Фильтр по дате приема
+        /// </summary>
+        /// <returns></returns>
+        private async Task ApplyDateBetweenReceipt(DateTime date)
+        {
+            ClearFIODateFiltr();
+            await FViewDataContext.SetCardsByDateBetweenViewSource(date.Date, date.Date.AddDays(1));
+        }
+
         private async void fioTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (FLockFiltrChange) return;
-            await ApplyFiltr();
+            if (FLockFiltrChange)
+                return;
+            await ApplyPersonFiltr();
         }
 
 
@@ -137,8 +174,9 @@ namespace Reg2015.View.Panels
 
         private async void dateBirthDayDateePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (FLockFiltrChange) return;
-            await ApplyFiltr();
+            if (FLockFiltrChange)
+                return;
+            await ApplyPersonFiltr();
 
             ////if (!dateBirthDayDateePicker.IsFocused)
             ////    return;
@@ -152,6 +190,22 @@ namespace Reg2015.View.Panels
             //DateTime xUpp = xLow.AddDays(1);
 
             //await FViewDataContext.SetCardsByDateBetweenViewSource(xLow, xUpp);
+        }
+
+        private async void dateFirstReceiptDateePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FLockFiltrChange)
+                return;
+
+            ClearFIODateFiltr();
+
+            DateTime? xDate = dateFirstReceiptDateePicker.SelectedDate;
+            if (!xDate.HasValue)
+            {
+                await FViewDataContext.SetDefaultCardsViewSource();
+                return;
+            }
+            await ApplyDateBetweenReceipt(xDate.Value);
         }
     }
 }
