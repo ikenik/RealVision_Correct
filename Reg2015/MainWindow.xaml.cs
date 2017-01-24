@@ -64,9 +64,11 @@ namespace Reg2015
         private async void pnlMainPanient_DateTimeLostEvent(string f, string i, string o, DateTime birthDate)
         {
             tblPatientInfo xCurrent = FViewDataContext.CurrentPatient;
-            if (!Guid.Empty.Equals(xCurrent.ID))
+            if (xCurrent == null)
                 return;
 
+            if (!Guid.Empty.Equals(xCurrent.ID))
+                return;
 
             List<tblPatientInfo> xPatients = await FDataHelper.FindPatientIDByFIOData(f, i, o, birthDate);
             if (xPatients.Count == 0)

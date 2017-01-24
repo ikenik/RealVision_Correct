@@ -192,7 +192,7 @@ namespace Reg2015.ViewModel
         {
             return (from ptnt in GetPatientInfoContext()
                     where (ptnt.DateDelete == null) &&
-                          ((ptnt.BirthDay >= low) && (ptnt.BirthDay < upp))
+                          ((ptnt.DateCreate >= low) && (ptnt.DateCreate < upp))
                     orderby ptnt.FirstName, ptnt.LastName, ptnt.FatherName
                     select ptnt as tblPatientInfo).Take(Properties.Settings.Default.ViewCardLimit);
         }
