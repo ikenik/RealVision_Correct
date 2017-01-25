@@ -15,7 +15,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <!--<Style TargetType="Window">
         <Setter Property="FontSize" Value="16"/>
     </Style>-->

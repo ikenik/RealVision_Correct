@@ -7,6 +7,7 @@ using Reg2015.RVDataModel;
 namespace Reg2015.View.Convertors
 {
 
+    /// <summary>Полных лет сегодня</summary>
     [ValueConversion(typeof(CardKind), typeof(string))]
     class CardKindDescription : IValueConverter
     {
