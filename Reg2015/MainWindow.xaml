@@ -65,7 +65,7 @@
             <TabControl x:Name="tbPanels" Grid.Column="2" Margin="0,9,5,9">
 
                 <TabItem Header="Пациент" DataContext="{DynamicResource tblPatientInfoViewSource}">
-                    <Grid x:Name="pnlPatInfo" Grid.Column="2">
+                    <Grid x:Name="pnlPatInfo" Grid.Column="2" IsEnabled="{Binding Count, Mode=OneWay}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
