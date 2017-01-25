@@ -42,6 +42,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -58,9 +59,13 @@
             <xctk:WatermarkTextBox x:Name="oTextBox" Watermark="Отчество" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" TextChanged="fioTextBox_TextChanged" />
 
 
-            <Label  Content="Дата:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <Label  Content="Дата рожд.:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <DatePicker x:Name="dateBirthDayDateePicker" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" SelectedDateChanged="dateBirthDayDateePicker_SelectedDateChanged" FirstDayOfWeek="Monday"/>
-            <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Сбросить" Margin="3" Click="btnFlashFiltrClick"/>
+
+            <Label  Content="Дата прием.:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dateFirstReceiptDateePicker" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" SelectedDateChanged="dateFirstReceiptDateePicker_SelectedDateChanged" FirstDayOfWeek="Monday"/>
+
+            <Button Grid.Row="6" Grid.ColumnSpan="2" Content="Сбросить" Margin="3" Click="btnFlashFiltrClick"/>
             <!--<xctk:WatermarkTextBox x:Name="watermarkTextBox" Grid.Column="1" Margin="6.181,-0.831,28.115,9.761" Grid.Row="2" TextWrapping="Wrap" Watermark="ytrytr"/>-->
         </Grid>
 

@@ -12,6 +12,7 @@ namespace NK.Collections.ObjectViewModel
     public interface IIndestructibleObject
     {
         DateTime? DateDelete { get; set; }
+        bool ForceRemove { get; set; }
     }
 
     /// <summary>
@@ -46,7 +47,7 @@ namespace NK.Collections.ObjectViewModel
                     foreach (T OldItem in e.OldItems)
                     {
                         IIndestructibleObject xObj = OldItem as IIndestructibleObject;
-                        if (xObj == null)
+                        if ((xObj == null) || (xObj.ForceRemove))
                             FSetContext.Remove(OldItem);
                         else
                             xObj.DateDelete = DateTime.Now;
