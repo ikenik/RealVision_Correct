@@ -203,7 +203,7 @@ namespace Reg2015.Reports
         public int Number { get { return FPatient.Number; } }
         public bool ForСataract { get { return FPatient.Kind == CardKind.ForСataract; } }
 
-        public string Address { get { return (FPatient.Address.Length < 2) ? "________________________________" : FPatient.Address; } }
+        public string Address { get { return (String.IsNullOrWhiteSpace(FPatient.Address) || (FPatient.Address.Length == 1)) ? "________________________________" : FPatient.Address; } }
 
         /// <summary>Пол</summary>
         public string Sex { get { return Formater.SexToStr(FPatient.Sex); } }
