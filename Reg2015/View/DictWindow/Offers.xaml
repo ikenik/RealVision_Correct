@@ -193,7 +193,9 @@
 							ItemsSource="{Binding Source={StaticResource MonitorTextSource}}" 
 							IsSynchronizedWithCurrentItem="False"
 							IsEditable="True"/>
-                        <TextBlock Text="с момента проведения лечения"/>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Стоимость операции  зависит от ... операционного вмешательства"/>
                         <ComboBox Text="{Binding PriceDependence, UpdateSourceTrigger=PropertyChanged}"
 							ItemsSource="{Binding Source={StaticResource PriceDependenceSource}}" 
 							IsSynchronizedWithCurrentItem="False"
