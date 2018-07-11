@@ -1,7 +1,30 @@
-SELECT        tblPatientInfo.Number AS [Номер карты], tblPatient.FirstName AS Фамилия, tblPatient.LastName AS Имя, tblPatient.FatherName AS Отчество, 
-                         tblPatientInfo.Address AS Адрес, tblPatientInfo.Job AS [Место службы. работы], tblPatientInfo.Post AS [Профессия. должность], 
-                         tblPatient.BirthDay AS [Дата рождени], tblPatientInfo.PaspSeriya AS [Серия документа], tblPatientInfo.PaspNumber AS [Номер документа], 
-                         tblPatientInfo.PaspIssuing AS [Кем выдан], tblPatientInfo.Phon AS Телефон, tblPatient.DateDelete
+SELECT
+	tblPatientInfo.Number AS [Номер карты],
+	tblPatient.FirstName AS [Фамилия],
+	tblPatient.LastName AS [Имя],
+	tblPatient.FatherName AS [Отчество],
+	NULL AS [Республика, область],
+	NULL AS [Район],
+	NULL AS [Населенный пункт],
+	NULL AS [Улица (переулок)],
+	NULL AS [дом],
+	NULL AS [корпус],
+	NULL AS [Строение],
+	NULL AS [Квартира],
+	tblPatientInfo.Job AS [Место службы, работы],
+	NULL AS [Отделение],
+	tblPatientInfo.Post AS [Профессия, должность],
+	tblPatient.BirthDay AS [Дата рождения],
+	tblPatientInfo.PaspNumber AS [Номер документа],
+	tblPatientInfo.PaspSeriya AS [Серия документа],
+	tblPatientInfo.PaspIssuing AS [Кем выдан],
+	NULL AS [Дата выдачи],
+	tblPatientInfo.Phon AS [Телефон],
+	NULL AS [Дополнительный телефон],
+	NULL AS [FAX],
+	NULL AS [Доп.факс],
+	NULL AS [EMAIL],
+	tblPatientInfo.Address AS [Address_source]
 FROM            tblPatient INNER JOIN
                          tblPatientInfo ON tblPatient.ID = tblPatientInfo.ID
 WHERE        (tblPatient.DateDelete IS NULL)
